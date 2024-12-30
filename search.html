@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Files</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية مشابهة للهيدر */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* لضمان أن المربع في منتصف الصفحة عموديًا */
+            margin: 0;
+        }
+
+        .container {
+            width: 90%; /* العرض بنسبة مئوية لتقليص الحجم */
+            max-width: 600px; /* الحد الأقصى للعرض */
+            background-color: #ffffff;
+            padding: 20px; /* المسافات الداخلية */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 3px solid #375e7e; /* إطار من جميع الجوانب */
+            margin-top: 0;
+            max-height: 600px; /* الحد الأقصى للارتفاع */
+            overflow-y: auto; /* يسمح بالتمرير في حال كان المحتوى أكثر من المساحة المتاحة */
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-logo img {
+            width: 120px; /* عرض الشعار */
+        }
+
+        h1 {
+            font-size: 20px; /* تصغير حجم العنوان */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #375e7e;
+            border-color: #375e7e;
+        }
+
+        .btn-primary:hover {
+            background-color: #2a4d65;
+            border-color: #2a4d65;
+        }
+
+        .alert {
+            margin-top: 10px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .file-list-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الشعار داخل المربع -->
+        <div class="header-logo">
+            <img src="logo.png" alt="LockCloud Logo"> <!-- تأكد من وجود الشعار في نفس المجلد -->
+        </div>
+
+        <h1>Search Your Encrypted Files</h1>
+        
+        <form action="/search" method="GET" class="mb-4">
+            <div class="mb-3">
+                <label for="search-query" class="form-label">Search by File Name or Tags</label>
+                <input type="text" id="search-query" name="query" class="form-control" placeholder="Enter keywords..." required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- كلمة "Results" ستظهر قبل "Your Files" -->
+        <div id="search-results">
+            <h3>Results:</h3>
+            <!-- سيتم تحديث هذا القسم بعد تقديم الاستعلام بواسطة JavaScript -->
+        </div>
+
+        <!-- كلمة "Your Files" سيتم عرضها دائمًا -->
+        <div class="file-list-section">
+            <h3>Your Files:</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">File Name</th>
+                        <th scope="col">Date Uploaded</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- جدول فارغ الآن سيتم ملؤه عندما يتم تحميل الملفات -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // مثال على كيفية التعامل مع نتائج البحث باستخدام JavaScript
+        document.querySelector("form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var query = document.getElementById('search-query').value;
+            // إرسال طلب بحث إلى الخادم (يمكنك استخدام AJAX لهذا الغرض)
+            // في الوقت الحالي، نقوم بمحاكاة البحث
+            document.getElementById('search-results').innerHTML = `
+                <div class="alert alert-success" role="alert">
+                    Search results for: <strong>${query}</strong> are displayed below.
+                </div>
+            `;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- تحديد لغة الصفحة بالإنجليزية -->
+<head>
+    <meta charset="UTF-8"> <!-- تحديد ترميز الأحرف لضمان عرض النصوص بشكل صحيح -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- جعل الصفحة متجاوبة مع الأجهزة المختلفة -->
+    <title>Contact Us</title> <!-- عنوان الصفحة الذي يظهر في شريط المتصفح -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- تضمين مكتبة Bootstrap لتنسيق الصفحة -->
+    <style>
+        /* تنسيق الصفحة العامة */
+        body {
+            font-family: Arial, sans-serif; /* تحديد الخط الافتراضي */
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية متدرجة بالأزرق السماوي والغامق */
+            display: flex; /* استخدام Flexbox لتوسيط المحتوى */
+            justify-content: center; /* توسيط المحتوى أفقيًا */
+            align-items: center; /* توسيط المحتوى عموديًا */
+            height: 100vh; /* جعل ارتفاع الصفحة يغطي الشاشة بالكامل */
+            margin: 0; /* إزالة الهوامش الافتراضية */
+        }
+
+        /* تصميم صندوق المحتوى */
+        .container {
+            width: 80%; /* العرض النسبي للصندوق */
+            max-width: 800px; /* الحد الأقصى للعرض */
+            min-width: 500px; /* الحد الأدنى للعرض */
+            background-color: #ffffff; /* خلفية بيضاء للصندوق */
+            padding: 30px; /* مسافة داخلية حول المحتوى */
+            border-radius: 10px; /* زوايا مستديرة للصندوق */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف للصندوق */
+            border: 3px solid #375e7e; /* إطار أزرق للصندوق */
+        }
+
+        /* تنسيق قسم الشعار */
+        .header-logo {
+            text-align: center; /* توسيط الشعار */
+            margin-bottom: 20px; /* مسافة سفلية للشعار */
+        }
+
+        .header-logo img {
+            width: 150px; /* عرض الشعار */
+        }
+
+        /* تخصيص ألوان الأزرار */
+        .btn-primary {
+            background-color: #375e7e; /* لون خلفية الزر */
+            border-color: #375e7e; /* لون الحواف */
+        }
+
+        /* تأثير التمرير على الزر */
+        .btn-primary:hover {
+            background-color: #2a4d65; /* لون جديد عند التمرير */
+            border-color: #2a4d65; /* لون الحواف عند التمرير */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- قسم الشعار -->
+        <div class="header-logo">
+            <img src="logo.png" alt="Your Logo"> <!-- صورة الشعار (تأكد من وضعها في نفس المجلد) -->
+        </div>
+
+        <!-- عنوان الصفحة -->
+        <h1 class="text-center mb-4">Contact Us</h1>
+        
+        <!-- وصف قصير -->
+        <p>If you have any questions, feel free to reach out to us!</p>
+        
+        <!-- نموذج الاتصال -->
+        <form action="/send_message" method="POST"> <!-- يرسل البيانات إلى الخادم باستخدام POST -->
+            <!-- حقل إدخال الاسم -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label> <!-- تسمية الحقل -->
+                <input type="text" id="name" name="name" class="form-control" required> <!-- حقل إدخال النص مع جعل الإدخال مطلوبًا -->
+            </div>
+            
+            <!-- حقل إدخال البريد الإلكتروني -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label> <!-- تسمية الحقل -->
+                <input type="email" id="email" name="email" class="form-control" required> <!-- حقل إدخال البريد الإلكتروني مع التحقق -->
+            </div>
+            
+            <!-- حقل إدخال الرسالة -->
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label> <!-- تسمية الحقل -->
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea> <!-- حقل نصي متعدد السطور -->
+            </div>
+            
+            <!-- زر الإرسال -->
+            <button type="submit" class="btn btn-primary">Send Message</button> <!-- زر إرسال النموذج -->
+        </form>
+    </div>
+</body>
+</html>

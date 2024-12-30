@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt and Upload Files</title>
+    <!-- تضمين مكتبة Bootstrap لتحسين التصميم -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* تنسيق عام للصفحة */
+        body {
+            font-family: Arial, sans-serif; /* الخط المستخدم */
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية متدرجة */
+            display: flex;
+            justify-content: center; /* محاذاة المحتوى أفقيًا */
+            align-items: center; /* محاذاة المحتوى عموديًا */
+            height: 100vh; /* جعل ارتفاع الصفحة يملأ الشاشة */
+            margin: 0; /* إزالة الهوامش */
+        }
+        /* تصميم الحاوية الرئيسية للنموذج */
+        .container {
+            width: 100%;
+            max-width: 600px; /* أقصى عرض للحاوية */
+            background-color: #ffffff; /* خلفية بيضاء */
+            padding: 40px; /* مسافة داخلية */
+            border-radius: 10px; /* زوايا مستديرة */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للحاوية */
+        }
+        /* تصميم الشعار */
+        .header-logo {
+            text-align: center; /* توسيط الشعار */
+            margin-bottom: 20px; /* مسافة أسفل الشعار */
+        }
+        .header-logo img {
+            width: 150px; /* عرض الشعار */
+        }
+        /* تنسيق زر الإرسال */
+        .btn-primary {
+            background-color: #193445; /* لون الزر */
+            border-color: #193445; /* لون الحواف */
+            color: white; /* لون النص */
+        }
+        .btn-primary:hover {
+            background-color: #193445; /* نفس اللون عند التمرير */
+        }
+        /* إخفاء عنصر إدخال الملف */
+        .file-input {
+            display: none; /* إخفاء الإدخال الأصلي */
+        }
+        /* تصميم زر اختيار الملف */
+        .file-label {
+            display: block; /* زر بحجم البلوك */
+            width: 100%; /* عرض كامل الحاوية */
+            background-color: #193445; /* لون الخلفية */
+            color: white; /* لون النص */
+            padding: 10px; /* مسافة داخلية */
+            cursor: pointer; /* شكل المؤشر يشير أنه زر */
+            border-radius: 5px; /* زوايا مستديرة */
+            text-align: center; /* توسيط النص */
+        }
+        .file-label:hover {
+            background-color: #2a4d65; /* لون أغمق عند التمرير */
+        }
+        /* محاذاة الأزرار */
+        .button-container {
+            display: flex; /* عرض الأزرار في نفس السطر */
+            justify-content: space-between; /* توزيع الأزرار بالتساوي */
+            margin-top: 20px; /* مسافة علوية */
+        }
+        .button-container .btn {
+            width: 48%; /* عرض كل زر نصف المساحة */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الشعار -->
+        <div class="header-logo">
+            <img src="logo.png" alt="LockCloud Logo"> <!-- تأكد من وجود الشعار في نفس المجلد -->
+        </div>
+
+        <h1 class="text-center mb-4">Encrypt and Upload Your Files</h1>
+        
+        <!-- نموذج تحميل الملفات -->
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <!-- حقل اختيار الملف -->
+            <div class="mb-3">
+                <label for="file" class="form-label">Select File to Upload</label>
+                <input type="file" id="file" name="file" class="file-input" required> <!-- إدخال غير مرئي -->
+                <label for="file" class="file-label">Choose File</label> <!-- زر مخصص -->
+                <div id="fileError" class="alert alert-danger" style="display:none;">Please select a file to upload!</div>
+            </div>
+            <!-- حقل إدخال كلمة المرور للتشفير -->
+            <div class="mb-3">
+                <label for="encryption-key" class="form-label">Encryption Password</label>
+                <input type="password" id="encryption-key" name="encryption-key" class="form-control" required>
+                <div id="passwordError" class="alert alert-danger" style="display:none;">Password must be at least 8 characters long.</div>
+            </div>
+            <!-- اختيار نوع التشفير -->
+            <div class="mb-3">
+                <label for="encryption-type" class="form-label">Choose Encryption Type</label>
+                <select id="encryption-type" name="encryption-type" class="form-select" required>
+                    <option value="aes">AES (Advanced Encryption Standard)</option>
+                    <option value="rsa">RSA (Rivest–Shamir–Adleman)</option>
+                    <option value="3des">3DES (Triple DES)</option>
+                    <option value="blowfish">Blowfish</option>
+                    <option value="chacha20">ChaCha20</option>
+                </select>
+            </div>
+            
+            <!-- أزرار الإجراء -->
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Encrypt and Upload</button>
+                <a href="search.html" class="btn btn-secondary">Go to Your Files</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // إضافة تحقق عند تقديم النموذج
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            let isValid = true;
+            const fileInput = document.getElementById("file");
+            const passwordInput = document.getElementById("encryption-key");
+
+            // التحقق من اختيار الملف
+            if (!fileInput.files.length) {
+                document.getElementById("fileError").style.display = "block"; // إظهار رسالة الخطأ
+                isValid = false;
+            } else {
+                document.getElementById("fileError").style.display = "none"; // إخفاء رسالة الخطأ
+            }
+
+            // التحقق من طول كلمة المرور
+            if (passwordInput.value.length < 8) {
+                document.getElementById("passwordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+
+            // منع إرسال النموذج إذا لم تكن المدخلات صحيحة
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // التحقق من كلمة المرور أثناء الكتابة
+        document.getElementById("encryption-key").addEventListener("input", function() {
+            const passwordInput = document.getElementById("encryption-key");
+            if (passwordInput.value.length >= 8) {
+                document.getElementById("passwordError").style.display = "none";
+            } else {
+                document.getElementById("passwordError").style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

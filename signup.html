@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- تضمين مكتبة Bootstrap لتحسين التنسيق -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* تنسيق عام للصفحة */
+        body {
+            font-family: Arial, sans-serif; /* الخط المستخدم */
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية متدرجة اللون */
+            display: flex;
+            justify-content: center; /* محاذاة المحتوى أفقيًا */
+            align-items: center; /* محاذاة المحتوى عموديًا */
+            height: 100vh; /* جعل ارتفاع الصفحة يملأ الشاشة */
+            margin: 0; /* إزالة الهوامش */
+        }
+        /* تصميم الحاوية الرئيسية للنموذج */
+        .container {
+            width: 100%;
+            max-width: 400px; /* أقصى عرض للصندوق */
+            background-color: #ffffff; /* خلفية بيضاء للصندوق */
+            padding: 40px; /* مساحة داخلية */
+            border-radius: 10px; /* زوايا مستديرة للصندوق */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للصندوق */
+        }
+        /* تصميم شعار الرأس */
+        .header-logo img {
+            width: 150px; /* عرض الشعار */
+            display: block; /* عرض الشعار في سطر جديد */
+            margin: 0 auto; /* توسيط الشعار */
+        }
+        /* تنسيق زر الإرسال */
+        .btn-primary {
+            background-color: #193445; /* لون الخلفية */
+            border-color: #193445; /* لون الحواف */
+            color: white; /* لون النص */
+        }
+        .btn-primary:hover {
+            background-color: #193445; /* نفس اللون عند التمرير */
+            border-color: #193445;
+        }
+        /* روابط أسفل النموذج */
+        .footer-link {
+            text-align: center; /* توسيط النص */
+            margin-top: 15px; /* مسافة علوية */
+        }
+        .footer-link a {
+            text-decoration: none; /* إزالة التسطير */
+            color: #193445; /* لون النص */
+            font-weight: bold; /* النص عريض */
+        }
+        /* مؤشر قوة كلمة المرور */
+        #password-strength {
+            font-size: 0.9rem; /* حجم النص */
+            margin-top: 5px; /* مسافة علوية */
+        }
+        .weak {
+            color: red; /* لون النص عند كلمة مرور ضعيفة */
+        }
+        .medium {
+            color: orange; /* لون النص عند كلمة مرور متوسطة */
+        }
+        .strong {
+            color: green; /* لون النص عند كلمة مرور قوية */
+        }
+        /* رسالة الترحيب */
+        .welcome-message {
+            display: none; /* إخفاء الرسالة افتراضيًا */
+            text-align: center; /* توسيط النص */
+            font-size: 1.2rem; /* حجم النص */
+            font-weight: bold; /* النص عريض */
+            color: #193445; /* لون النص */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شعار الموقع -->
+        <div class="header-logo">
+            <img src="logo.png" alt="LockCloud Logo">
+        </div>
+        <h1 class="text-center mb-4">Sign Up</h1>
+        
+        <!-- رسالة الترحيب -->
+        <div id="welcomeMessage" class="welcome-message">
+            Welcome to LockCloud! Redirecting...
+        </div>
+
+        <!-- نموذج التسجيل -->
+        <form id="signupForm">
+            <!-- حقل البريد الإلكتروني -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <!-- حقل كلمة المرور -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" required>
+                <div id="password-strength"></div> <!-- عرض قوة كلمة المرور -->
+            </div>
+            <!-- حقل تأكيد كلمة المرور -->
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" id="confirm-password" class="form-control" required>
+                <div id="password-error" class="text-danger mt-2" style="display: none;">Passwords do not match!</div>
+            </div>
+            <!-- زر التسجيل -->
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <!-- رابط الانتقال لتسجيل الدخول -->
+            <div class="footer-link">
+                <p>Already have an account? <a href="login.html">Login here</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // فحص قوة كلمة المرور
+        const passwordInput = document.getElementById('password');
+        const strengthIndicator = document.getElementById('password-strength');
+        const passwordError = document.getElementById('password-error');
+
+        // عند إدخال المستخدم كلمة المرور
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value; // جلب قيمة كلمة المرور
+            const strength = checkPasswordStrength(password); // فحص قوتها
+
+            strengthIndicator.textContent = strength.message; // عرض الرسالة
+            strengthIndicator.className = strength.class; // تعيين الفئة
+        });
+
+        // وظيفة لتحديد قوة كلمة المرور
+        function checkPasswordStrength(password) {
+            let strength = { message: 'Weak', class: 'weak' };
+
+            if (password.length >= 8) {
+                if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password) && /[!@#$%^&*]/.test(password)) {
+                    strength = { message: 'Strong', class: 'strong' };
+                } else if (/[A-Z]/.test(password) || /[a-z]/.test(password) || /\d/.test(password)) {
+                    strength = { message: 'Medium', class: 'medium' };
+                }
+            }
+
+            return strength;
+        }
+
+        // حدث إرسال النموذج
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // منع إعادة تحميل الصفحة
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // التحقق من مطابقة كلمة المرور
+            if (password !== confirmPassword) {
+                passwordError.style.display = 'block'; // عرض رسالة الخطأ
+                return;
+            } else {
+                passwordError.style.display = 'none'; // إخفاء رسالة الخطأ
+            }
+
+            // إظهار رسالة الترحيب
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const signupForm = document.getElementById('signupForm');
+            signupForm.style.display = 'none';
+            welcomeMessage.style.display = 'block';
+
+            // إعادة التوجيه بعد ثانيتين
+            setTimeout(() => {
+                window.location.href = 'encryption_upload.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

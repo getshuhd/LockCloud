@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- تحديد لغة الصفحة بالإنجليزية -->
+<head>
+    <meta charset="UTF-8"> <!-- تحديد ترميز الأحرف لضمان عرض النصوص بشكل صحيح -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- جعل الصفحة متوافقة مع جميع الأجهزة -->
+    <title>About Us</title> <!-- عنوان الصفحة الذي يظهر في شريط تبويب المتصفح -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- تضمين مكتبة Bootstrap لتنسيق الصفحة -->
+    <style>
+        /* إعدادات الخط العام والخلفية */
+        body {
+            font-family: Arial, sans-serif; /* تحديد خط النص */
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية متدرجة من الأزرق السماوي إلى الأزرق الداكن */
+            display: flex; /* استخدام العرض المرن لتوسيط المحتوى */
+            justify-content: center; /* توسيط المحتوى أفقيًا */
+            align-items: center; /* توسيط المحتوى عموديًا */
+            height: 100vh; /* جعل ارتفاع الصفحة يتناسب مع الشاشة بالكامل */
+            margin: 0; /* إزالة الهوامش الافتراضية */
+        }
+
+        /* تنسيق صندوق المحتوى الرئيسي */
+        .container {
+            width: 80%; /* العرض النسبي للصندوق */
+            max-width: 800px; /* أقصى عرض للصندوق */
+            min-width: 500px; /* أقل عرض للصندوق */
+            background-color: #ffffff; /* خلفية بيضاء للصندوق */
+            padding: 30px; /* مسافة داخلية حول المحتوى */
+            border-radius: 10px; /* زوايا دائرية للصندوق */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف حول الصندوق */
+            border: 3px solid #375e7e; /* إطار أزرق حول الصندوق */
+        }
+
+        /* إعدادات قسم الشعار */
+        .header-logo {
+            text-align: center; /* توسيط الشعار */
+            margin-bottom: 20px; /* مسافة سفلية أسفل الشعار */
+        }
+
+        .header-logo img {
+            width: 150px; /* عرض الشعار */
+        }
+
+        /* تخصيص ألوان الأزرار */
+        .btn-primary {
+            background-color: #375e7e; /* لون خلفية الزر */
+            border-color: #375e7e; /* لون حدود الزر */
+        }
+
+        /* تأثير عند تمرير الماوس على الزر */
+        .btn-primary:hover {
+            background-color: #2a4d65; /* تغيير لون الخلفية عند التمرير */
+            border-color: #2a4d65; /* تغيير لون الحواف عند التمرير */
+        }
+
+        /* تخصيص عناوين النص */
+        h1, h2 {
+            color: #375e7e; /* اللون الأزرق لعناوين النصوص */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- قسم الشعار -->
+        <div class="header-logo">
+            <img src="logo.png" alt="Your Logo"> <!-- عرض الشعار (تأكد من وجود الشعار في نفس المجلد) -->
+        </div>
+
+        <!-- عنوان رئيسي مع توسيط -->
+        <h1 class="text-center mb-4">About LockCloud</h1>
+        
+        <!-- فقرة تعريفية بالموقع -->
+        <p>At LockCloud, we prioritize your privacy and security. Our mission is to provide secure, encrypted cloud storage solutions accessible to everyone.</p>
+        
+        <!-- عنوان قسم الرؤية -->
+        <h2>Our Vision</h2>
+        
+        <!-- فقرة توضح رؤية الشركة -->
+        <p>To be a trusted provider of secure cloud storage, helping individuals and businesses protect their data with confidence.</p>
+        
+        <!-- عنوان قسم معلومات الاتصال -->
+        <h2>Contact Information</h2>
+        
+        <!-- عرض معلومات الاتصال -->
+        <p>Email: slockcloud@gmail.com</p>
+    </div>
+</body>
+</html>

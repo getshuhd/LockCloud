@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- تحديد لغة الصفحة بالإنجليزية -->
+<head>
+    <meta charset="UTF-8"> <!-- تحديد ترميز الأحرف بـ UTF-8 لضمان عرض النصوص بشكل صحيح -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- لجعل الصفحة متوافقة مع الأجهزة المختلفة -->
+    <title>LockCloud - Secure Cloud Storage</title> <!-- عنوان الصفحة الذي يظهر في تبويب المتصفح -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- تضمين مكتبة Bootstrap لتنسيق الصفحة -->
+    <style>
+        /* ضبط الخط المستخدم في الصفحة */
+        body { font-family: Arial, sans-serif; }
+
+        /* تصميم الهيدر: خلفية مدرجة وألوان النصوص */
+        header {
+            background: linear-gradient(to right, #5b9fc9, #1e4a6d); /* خلفية بتدرج ألوان */
+            color: white; /* لون النصوص أبيض */
+            text-align: center; /* توسيط النصوص */
+            padding: 50px 0; /* مسافة داخلية من الأعلى والأسفل */
+        }
+
+        /* تصميم أيقونات المميزات */
+        .feature-icon { 
+            width: 80px; /* عرض الأيقونة */
+            height: 80px; /* ارتفاع الأيقونة */
+            margin-bottom: 15px; /* مسافة أسفل الأيقونة */
+        }
+
+        /* تصميم الفوتر */
+        footer {
+            background-color: #f1f1f1; /* لون خلفية الفوتر */
+            color: #375e7e; /* لون النصوص */
+            text-align: center; /* توسيط النصوص */
+            padding: 10px; /* مسافة داخلية من الأعلى والأسفل */
+        }
+
+        /* تخصيص ألوان الأزرار */
+        .btn-primary, .btn-dark-blue {
+            background-color: #193445; /* لون الخلفية الجديد */
+            border-color: #193445; /* لون الحواف الجديد */
+            color: white; /* لون النص الأبيض */
+        }
+
+        /* تأثير عند تمرير الماوس على الأزرار */
+        .btn-primary:hover, .btn-dark-blue:hover {
+            background-color: #193445; /* نفس اللون للحفاظ على التصميم */
+            border-color: #193445; /* نفس اللون للحفاظ على التصميم */
+        }
+
+        /* إعداد الخيارات المخفية الخاصة بتسجيل الدخول والتسجيل */
+        .options-container {
+            display: none; /* إخفاء الخيارات افتراضيًا */
+            margin-top: 20px; /* مسافة علوية */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- شعار الموقع -->
+        <img src="logo.png" alt="LockCloud Logo" class="mb-4" width="150"> <!-- شعار بعرض 150 بكسل -->
+        <h1>Welcome to LockCloud</h1> <!-- عنوان رئيسي -->
+        <p>Encrypt, store, and share your files securely in the cloud.</p> <!-- وصف قصير للموقع -->
+
+        <!-- زر البداية -->
+        <button id="getStartedBtn" class="btn btn-dark-blue">Get Started</button>
+
+        <!-- الخيارات المخفية التي تظهر عند الضغط على زر البداية -->
+        <div id="options" class="options-container">
+            <div class="mt-4">
+                <a href="login.html" class="btn btn-primary">Login</a> <!-- رابط لتسجيل الدخول -->
+                <a href="signup.html" class="btn btn-primary">Sign Up</a> <!-- رابط لإنشاء حساب -->
+            </div>
+        </div>
+    </header>
+
+    <main class="container text-center my-5">
+        <!-- قسم المميزات -->
+        <h2 class="mb-4">Why Choose LockCloud?</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- ميزة: التشفير الكامل -->
+                <img src="encrypt-icon.png" alt="Encryption Icon" class="feature-icon">
+                <h3>End-to-End Encryption</h3>
+                <p>Your files are encrypted before they leave your device.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- ميزة: تخزين موثوق -->
+                <img src="cloud-icon.png" alt="Cloud Icon" class="feature-icon">
+                <h3>Reliable Cloud Storage</h3>
+                <p>Access your data anytime, anywhere.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- ميزة: مشاركة الملفات الآمنة -->
+                <img src="share-icon.png" alt="Share Icon" class="feature-icon">
+                <h3>Secure File Sharing</h3>
+                <p>Share files securely with a simple link.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- روابط الفوتر -->
+        <p>&copy; 2024 LockCloud. <a href="contact.html">Contact Us</a> | <a href="about.html">About Us</a></p>
+    </footer>
+
+    <script>
+        // وظيفة لإظهار/إخفاء الخيارات عند الضغط على زر "Get Started"
+        document.getElementById('getStartedBtn').addEventListener('click', function() {
+            var options = document.getElementById('options'); // تحديد العنصر الذي يحتوي على الخيارات
+            if (options.style.display === 'none' || options.style.display === '') {
+                options.style.display = 'block'; // إظهار الخيارات إذا كانت مخفية
+            } else {
+                options.style.display = 'none'; // إخفاء الخيارات إذا كانت ظاهرة
+            }
+        });
+    </script>
+</body>
+</html>
